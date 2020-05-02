@@ -3,5 +3,5 @@ import React from 'react';
 // import { Container } from './styles';
 
 export default function Recipientes() {
-  return <div />;
+  return <h1>Recipientes</h1>;
 }
