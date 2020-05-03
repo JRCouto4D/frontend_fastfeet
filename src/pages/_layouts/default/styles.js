@@ -4,4 +4,3 @@ export const Wrapper = styled.div`
   height: 100%;
   background: #dddddd;
 `;
-export const Content = styled.div``;
