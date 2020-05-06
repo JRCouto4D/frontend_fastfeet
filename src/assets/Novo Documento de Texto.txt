@@ -1,0 +1,33 @@
+<tr>
+          <td>#01</td>
+          <td>Quézia Reis Cardozo Couto</td>
+          <td>
+            <Deliveryman>
+              <img src={avatar} alt="Avatar" />
+              Jefferson Rocha Couto
+            </Deliveryman>
+          </td>
+          <td>Itapetinga</td>
+          <td>Bahia</td>
+          <td>Entregue</td>
+          <td>
+            <button type="button">
+              <MdMoreHoriz size={20} color="#C6C6C6" />
+            </button>
+          </td>
+        </tr>
+
+        <div>
+          <MdVisibility size={20} color="#8E5BE8" />
+          Visualizar
+        </div>
+
+        <div>
+          <MdCreate size={20} color="##4D85EE" />
+          Visualizar
+        </div>
+
+        <div>
+          <MdDeleteForever size={20} color="##DE3B3B" />
+          Visualizar
+        </div>

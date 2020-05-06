@@ -18,22 +18,24 @@ export default function Header() {
   return (
     <Container>
       <Content>
-        <Link to="/orders">
+        <div>
           <img src={logo} alt="fastfeet" />
-        </Link>
 
-        <nav>
-          <Link to="/orders">ENCOMENDAS</Link>
-          <Link to="/deliverymen">ENTREGADORES</Link>
-          <Link to="/recipientes">DESTINATÁRIOS</Link>
-          <Link to="/problems">PROBLEMAS</Link>
-        </nav>
+          <nav>
+            <Link to="/orders">ENCOMENDAS</Link>
+            <Link to="/deliverymen">ENTREGADORES</Link>
+            <Link to="/recipientes">DESTINATÁRIOS</Link>
+            <Link to="/problems">PROBLEMAS</Link>
+          </nav>
+        </div>
 
         <Profile>
-          <strong>{profile.name}</strong>
-          <button type="button" onClick={handleSignOut}>
-            sair do sistema
-          </button>
+          <div>
+            <strong>{profile.name}</strong>
+            <button type="button" onClick={handleSignOut}>
+              sair do sistema
+            </button>
+          </div>
         </Profile>
       </Content>
     </Container>
