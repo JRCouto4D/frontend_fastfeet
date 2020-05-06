@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   MdDeleteForever,
@@ -12,12 +13,12 @@ import { setModalTrue } from '~/store/module/modal/actions';
 
 import { Container, Badge, KeyBoard, ActionsList } from '../styles';
 
-export default function OrdersActions() {
+export default function OrdersActions({ deliveries }) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
-  function visibleModal() {
-    dispatch(setModalTrue());
+  function visibleModal(delivery) {
+    dispatch(setModalTrue(delivery));
   }
 
   function handleActionsVisible() {
@@ -38,7 +39,12 @@ export default function OrdersActions() {
         <ActionsList onClick={close} visible={visible}>
           <KeyBoard color="#C6C6C6" visible={visible} />
           <div>
-            <button onClick={visibleModal} type="button">
+            <button
+              onClick={() => {
+                visibleModal(deliveries);
+              }}
+              type="button"
+            >
               <MdVisibility size={20} color="#8E5BE8" />
               <span>Vizualizar</span>
             </button>
@@ -58,3 +64,7 @@ export default function OrdersActions() {
     </>
   );
 }
+
+OrdersActions.propsTypes = {
+  deliveries: PropTypes.shape().isRequired,
+};
