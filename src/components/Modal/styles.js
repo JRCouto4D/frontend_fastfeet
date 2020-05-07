@@ -2,24 +2,28 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: calc(0% - 64px);
+  left: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.6);
-  top: 0;
-  left: 0;
+  width: 100%;
+  height: calc(100% + 70px);
+  min-height: calc(100% + 70px);
 
   button {
+    position: absolute;
+    top: 5%;
+    left: calc(100% - 80px);
     border: none;
     background: none;
-    position: absolute;
-    right: 15px;
-    top: 15px;
   }
 `;
 
 export const Content = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

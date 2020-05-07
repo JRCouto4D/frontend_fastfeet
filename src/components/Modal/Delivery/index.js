@@ -18,7 +18,6 @@ export default function DeliveryModal({ delivery }) {
     city: delivery ? delivery.recipient.city : '',
     state: delivery ? delivery.recipient.state : '',
     zip_code: delivery ? delivery.recipient.zip_code : '',
-    signature: delivery ? delivery.recipient.signature : '',
   };
 
   const dispatch = useDispatch();
@@ -43,11 +42,20 @@ export default function DeliveryModal({ delivery }) {
     return date ? formatDate(date) : 'Ainda pendente';
   }
 
+  function checkSignature() {
+    if (!delivery) {
+      return false;
+    }
+
+    return !!delivery.signature;
+  }
+
   return (
     <Container>
       <button onClick={setModal} type="button">
         <MdClear size={40} color="#fff" />
       </button>
+
       <Content>
         <div>
           <strong>Informações de encomenda</strong>
@@ -67,7 +75,11 @@ export default function DeliveryModal({ delivery }) {
           <br />
           <div className="assign">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Assinatura_Jos%C3%A9_Saramago.png"
+              src={
+                checkSignature()
+                  ? delivery.signature.url
+                  : 'https://img.freepik.com/fotos-gratis/icone-de-sinal-de-aviso-triangulo-amarelo-isolado_53876-71267.jpg?size=626&ext=jpg'
+              }
               alt="assinatura"
             />
           </div>

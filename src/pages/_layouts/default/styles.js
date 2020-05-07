@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Wrapper = styled.div`
-  widows: 100%;
   min-width: 1200px;
-  height: 100%;
+  min-height: 665px;
   background: #f5f5f5;
-  margin: auto;
 `;
 
 export const Content = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-width: 1200px;
-  margin: 35px auto 0;
+  margin: 0 auto auto;
+  padding-top: 25px;
 
   h1 {
     font-size: 24px;
@@ -29,7 +29,7 @@ export const Content = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 35px 0 25px;
+    margin: 15px 0 15px;
 
     div {
       display: flex;
@@ -74,30 +74,6 @@ export const Content = styled.div`
       &:hover {
         background: ${darken(0.05, '#7d40e7')};
       }
-    }
-  }
-
-  table {
-    width: 100%;
-    min-width: 1100px;
-    display: grid;
-    border-collapse: collapse;
-    grid-gap: 15px;
-
-    tr {
-      background: #fff;
-      border-radius: 5px;
-      align-items: center;
-    }
-
-    th {
-      padding: 10px;
-      background: #f5f5f5;
-      text-align: left;
-    }
-
-    td {
-      padding: 10px;
     }
   }
 `;
