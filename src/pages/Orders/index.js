@@ -1,10 +1,11 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { MdAdd, MdSearch, MdFastForward, MdFastRewind } from 'react-icons/md';
 import { FaSpinner } from 'react-icons/fa';
+import history from '~/services/history';
 
 import api from '~/services/api';
 
@@ -12,7 +13,7 @@ import OrdersActions from '~/components/Actions/Orders';
 
 import Modal from '~/components/Modal/Delivery';
 
-import { Container, Loading, Navigation } from './styles';
+import { Content, Container, Loading, Navigation } from './styles';
 
 export default function Orders() {
   const [deliveries, setDeliveries] = useState([]);
@@ -249,8 +250,8 @@ export default function Orders() {
   }
 
   return (
-    <>
-      <Container>
+    <Container>
+      <Content>
         <h1>Gerenciando encomendas</h1>
         <header>
           <div>
@@ -263,7 +264,7 @@ export default function Orders() {
             />
           </div>
 
-          <button onClick={prevPage} type="button">
+          <button onClick={() => history.push('orders/register')} type="button">
             <MdAdd color="#fff" size={25} /> CADASTRAR
           </button>
         </header>
@@ -295,7 +296,7 @@ export default function Orders() {
         >
           <Modal delivery={delivery} />
         </div>
-      </Container>
-    </>
+      </Content>
+    </Container>
   );
 }
