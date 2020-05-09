@@ -1,6 +1,9 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import {
   MdDeleteForever,
@@ -8,6 +11,9 @@ import {
   MdCreate,
   MdMoreHoriz,
 } from 'react-icons/md';
+
+import histoty from '~/services/history';
+import api from '~/services/api';
 
 import { setModalTrue } from '~/store/module/modal/actions';
 
@@ -17,7 +23,7 @@ export default function OrdersActions({ deliveries }) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
-  function visibleModal(delivery) {
+  function setModal(delivery) {
     dispatch(setModalTrue(delivery));
   }
 
@@ -27,6 +33,17 @@ export default function OrdersActions({ deliveries }) {
 
   function close() {
     setVisible(false);
+  }
+
+  async function deleteDelivery() {
+    const del = window.confirm(
+      'Você realmente deseja cancelar esta encomenda?'
+    );
+
+    if (del) {
+      await api.delete(`deliveries/${deliveries.id}`);
+      toast.success('Encomenda cancelada com sucesso');
+    }
   }
 
   return (
@@ -41,7 +58,7 @@ export default function OrdersActions({ deliveries }) {
           <div>
             <button
               onClick={() => {
-                visibleModal(deliveries);
+                setModal(deliveries);
               }}
               type="button"
             >
@@ -49,12 +66,15 @@ export default function OrdersActions({ deliveries }) {
               <span>Vizualizar</span>
             </button>
 
-            <button type="button">
+            <button
+              onClick={() => histoty.push('/orders/register', { deliveries })}
+              type="button"
+            >
               <MdCreate size={20} color="#4D85EE" />
               <span>Editar</span>
             </button>
 
-            <button type="button">
+            <button onClick={deleteDelivery} type="button">
               <MdDeleteForever size={20} color="#DE3B3B" />
               <span>Excluir</span>
             </button>

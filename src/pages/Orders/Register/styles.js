@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SelectInput from 'react-select';
+import SelectInput from 'react-select/async';
 
 export const Container = styled.div`
   width: 900px;
