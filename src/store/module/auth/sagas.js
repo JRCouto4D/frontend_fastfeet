@@ -19,7 +19,7 @@ export function* signIn({ payload }) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(user, token));
-    history.push('/orders');
+    history.push('/deliveries');
   } catch (err) {
     toast.error(
       'Erro ao tentar acessar o sistema. Por favor verifique seus dados'

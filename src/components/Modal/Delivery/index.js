@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -57,32 +57,30 @@ export default function DeliveryModal({ delivery }) {
       </button>
 
       <Content>
-        <div>
-          <strong>Informações de encomenda</strong>
-          <p>{`${data.street}, ${data.number}`}</p>
-          <p>{`${data.city} - ${data.state}`}</p>
-          <p>{data.zip_code}</p>
-          <hr />
-          <strong>Datas</strong>
-          <p>
-            <b>Retirada:</b> {delivery ? setDate(delivery.start_date) : ''}
-          </p>
-          <p>
-            <b>Entrega:</b> {delivery ? setDate(delivery.end_date) : ''}
-          </p>
-          <hr />
-          <strong>Assinatura do destinatário</strong>
-          <br />
-          <div className="assign">
-            <img
-              src={
-                checkSignature()
-                  ? delivery.signature.url
-                  : 'https://img.freepik.com/fotos-gratis/icone-de-sinal-de-aviso-triangulo-amarelo-isolado_53876-71267.jpg?size=626&ext=jpg'
-              }
-              alt="assinatura"
-            />
-          </div>
+        <strong>Informações de encomenda</strong>
+        <p>{`${data.street}, ${data.number}`}</p>
+        <p>{`${data.city} - ${data.state}`}</p>
+        <p>{data.zip_code}</p>
+        <hr />
+        <strong>Datas</strong>
+        <p>
+          <b>Retirada:</b> {delivery ? setDate(delivery.start_date) : ''}
+        </p>
+        <p>
+          <b>Entrega:</b> {delivery ? setDate(delivery.end_date) : ''}
+        </p>
+        <hr />
+        <strong>Assinatura do destinatário</strong>
+        <br />
+        <div className="assign">
+          <img
+            src={
+              checkSignature()
+                ? delivery.signature.url
+                : 'https://img.freepik.com/fotos-gratis/icone-de-sinal-de-aviso-triangulo-amarelo-isolado_53876-71267.jpg?size=626&ext=jpg'
+            }
+            alt="assinatura"
+          />
         </div>
       </Content>
     </Container>

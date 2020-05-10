@@ -4,8 +4,8 @@ import Route from './Route';
 
 import SignIn from '~/pages/SignIn';
 import Deliverymen from '~/pages/Deliverymen';
-import Orders from '~/pages/Orders';
-import OrdersRegister from '~/pages/Orders/Register';
+import Deliveries from '~/pages/Deliveries';
+import DeliveriesForom from '~/pages/DeliveriesForm';
 import Problems from '~/pages/Problems';
 import Recipientes from '~/pages/Recipientes';
 
@@ -15,11 +15,11 @@ export default function Routes() {
       <Route path="/" exact component={SignIn} />
 
       <Route path="/deliverymen" component={Deliverymen} isPrivate />
-      <Route path="/orders" exact component={Orders} isPrivate />
+      <Route path="/deliveries" exact component={Deliveries} isPrivate />
       <Route
-        path="/orders/register"
+        path="/deliveries/form"
         exact
-        component={OrdersRegister}
+        component={DeliveriesForom}
         isPrivate
       />
       <Route path="/problems" component={Problems} isPrivate />
