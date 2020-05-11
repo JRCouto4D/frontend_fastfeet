@@ -22,6 +22,7 @@ import {
 import Actions from '~/components/Actions';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
@@ -40,7 +41,6 @@ export default function Deliverymen() {
         page: pg,
       },
     });
-    console.tron.log(response.data);
 
     setDeliverymen(response.data.deliverymen);
     await setTotal(response.data.total);
@@ -94,7 +94,12 @@ export default function Deliverymen() {
             <div className="actions">
               <Actions>
                 <div>
-                  <button onClick={() => {}} type="button">
+                  <button
+                    onClick={() =>
+                      history.push('/deliverymen/form', { deliveryman })
+                    }
+                    type="button"
+                  >
                     <MdCreate color="#4D85EE" size={16} />
                     <span>Editar</span>
                   </button>
@@ -131,7 +136,10 @@ export default function Deliverymen() {
             />
           </SearchInput>
 
-          <button type="button">
+          <button
+            onClick={() => history.push('/deliverymen/form')}
+            type="button"
+          >
             <MdAdd size={25} color="#fff" />
             <span>CADASTRAR</span>
           </button>
