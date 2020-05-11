@@ -78,6 +78,7 @@ export const Select = styled(Async).attrs({
       border: '1px solid #DDDDDD',
       borderRadius: '4px',
       display: 'flex',
+      alignItems: 'center',
       height: '45px',
     }),
   },

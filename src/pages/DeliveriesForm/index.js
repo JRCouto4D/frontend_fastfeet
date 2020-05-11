@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { Form, Input } from '@rocketseat/unform';
 
@@ -50,36 +51,85 @@ export default function DeliveriesForm({ location }) {
     return response.data;
   }
 
+  async function handleSubmit(data) {
+    if (selectedRecipient === 0) {
+      toast.error('Antes de continuar, informe o destinatário');
+      return;
+    }
+
+    if (selectedDeliveryman === 0) {
+      toast.error('Antes de continuar, informe o entregador');
+      return;
+    }
+
+    if (data.product === '') {
+      toast.error('Antes de continuar, informe o produto');
+      return;
+    }
+
+    if (location.state) {
+      try {
+        await api.put(`deliveries/${location.state.delivery.id}`, {
+          product: data.product,
+          deliveryman_id: selectedDeliveryman,
+          recipient_id: selectedRecipient,
+        });
+        toast.success('Encomanda editada com sucesso!');
+        history.push('/deliveries');
+      } catch (err) {
+        toast.error('Erro ao tentar editar encomenda.');
+        history.push('/deliveries');
+      }
+    } else {
+      try {
+        await api.post('deliveries', {
+          product: data.product,
+          deliveryman_id: selectedDeliveryman,
+          recipient_id: selectedRecipient,
+        });
+        toast.success('Encomenda salva com sucesso!');
+        history.push('/deliveries');
+      } catch (err) {
+        toast.error('Erro ao tentar salvar encomenda.');
+      }
+    }
+  }
+
   return (
     <Container>
-      <header>
-        <strong>
-          {location.state ? 'Edição de encomendas' : 'Cadastro de encomendas'}
-        </strong>
-        <div>
-          <button
-            className="backButton"
-            type="button"
-            onClick={() => history.push('/deliveries')}
-          >
-            <MdChevronLeft color="#fff" size={20} />
-            <span>VOLTAR</span>
-          </button>
-          <button type="submit" onClick={() => {}}>
-            <MdCheck color="#fff" size={20} />
-            <span>SALVAR</span>
-          </button>
-        </div>
-      </header>
+      <Form
+        onSubmit={handleSubmit}
+        initialData={location.state && location.state.delivery}
+      >
+        <header>
+          <strong>
+            {location.state ? 'Edição de encomendas' : 'Cadastro de encomendas'}
+          </strong>
+          <div>
+            <button
+              className="backButton"
+              type="button"
+              onClick={() => history.push('/deliveries')}
+            >
+              <MdChevronLeft color="#fff" size={20} />
+              <span>VOLTAR</span>
+            </button>
+            <button type="submit" onClick={() => {}}>
+              <MdCheck color="#fff" size={20} />
+              <span>SALVAR</span>
+            </button>
+          </div>
+        </header>
 
-      <Content>
-        <Form>
+        <Content>
           <BoxSelect>
             <InputBlock>
               <strong>Destinatário</strong>
               <div>
                 <Select
                   defaultOptions
+                  onSelectResetsInput
+                  onBlurResetsInput={false}
                   value={recipientValue}
                   loadOptions={loadRecipients}
                   getOptionValue={(op) => op.id}
@@ -100,6 +150,7 @@ export default function DeliveriesForm({ location }) {
               <div>
                 <Select
                   defaultOptions
+                  onSelectResetsInput
                   value={deliverymanValue}
                   loadOptions={loadDeliveryman}
                   getOptionValue={(op) => op.id}
@@ -123,16 +174,13 @@ export default function DeliveriesForm({ location }) {
                   type="text"
                   id="product"
                   name="product"
-                  value={
-                    location.state ? location.state.delivery.product : null
-                  }
                   placeholder="Ex: Tênis Nike Air Max"
                 />
               </div>
             </InputBlock>
           </div>
-        </Form>
-      </Content>
+        </Content>
+      </Form>
     </Container>
   );
 }
