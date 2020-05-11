@@ -3,37 +3,36 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 1100px;
-  min-width: 1100px;
-  margin: 25px auto;
 
   header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 25px;
-
     strong {
       font-size: 24px;
       color: #444;
     }
 
-    button {
-      background: #7d40e7;
-      width: 142px;
-      height: 36px;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      border-radius: 4px;
+    div {
       display: flex;
-      justify-content: center;
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      transition: background 0.2s;
+      margin: 10px 0;
 
-      &:hover {
-        background: ${darken(0.05, '#7d40e7')};
+      button {
+        background: #7d40e7;
+        width: 142px;
+        height: 36px;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.2s;
+
+        &:hover {
+          background: ${darken(0.06, '#7d40e7')};
+        }
       }
     }
   }
@@ -41,8 +40,7 @@ export const Container = styled.div`
   ul {
     width: 100%;
     display: grid;
-    grid-gap: 14px;
-    padding-bottom: 30px;
+    grid-gap: 12px;
 
     li.header {
       margin-top: 3px;

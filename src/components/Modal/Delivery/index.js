@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -9,84 +9,88 @@ import { MdClear } from 'react-icons/md';
 
 import { setModalFalse } from '~/store/module/modal/actions';
 
-import { Container, Content } from '../styles';
+import { Container, Content, InfoDelivery, BoxSignature } from '../styles';
 
-export default function DeliveryModal({ delivery }) {
-  const data = {
-    street: delivery ? delivery.recipient.street : '',
-    number: delivery ? delivery.recipient.number : '',
-    city: delivery ? delivery.recipient.city : '',
-    state: delivery ? delivery.recipient.state : '',
-    zip_code: delivery ? delivery.recipient.zip_code : '',
-  };
-
+export default function DeliveryModal() {
+  const { delivery } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
 
-  function setModal() {
+  function closeModal() {
     dispatch(setModalFalse());
   }
 
-  function formatDate(date) {
-    const dateFormatted = format(
-      parseISO(date),
-      "d'/'MM'/'yyyy 'às' H 'hs e 'm' mim'",
+  function dataFormatted(data) {
+    const newData = format(
+      parseISO(data),
+      "d'/'MM'/'yyyy' às 'H' hs e 'm' min",
       {
         locale: pt,
       }
     );
 
-    return dateFormatted;
+    return newData;
   }
 
-  function setDate(date) {
-    return date ? formatDate(date) : 'Ainda pendente';
-  }
-
-  function checkSignature() {
-    if (!delivery) {
-      return false;
-    }
-
-    return !!delivery.signature;
-  }
-
-  return (
+  return delivery ? (
     <Container>
-      <button onClick={setModal} type="button">
+      <button onClick={closeModal} type="button">
         <MdClear size={40} color="#fff" />
       </button>
 
       <Content>
-        <strong>Informações de encomenda</strong>
-        <p>{`${data.street}, ${data.number}`}</p>
-        <p>{`${data.city} - ${data.state}`}</p>
-        <p>{data.zip_code}</p>
+        <h1>Inpormações da encomenda</h1>
+        <InfoDelivery>
+          <div>
+            <strong>Produto</strong>
+            <p>{delivery.delivery.product}</p>
+          </div>
+          <div>
+            <strong>Endereço de entrega</strong>
+            <p>
+              {delivery.delivery.recipient.street},{' '}
+              {delivery.delivery.recipient.number} <br />
+              {delivery.delivery.recipient.city} -{' '}
+              {delivery.delivery.recipient.state} <br />
+              {delivery.delivery.recipient.zip_code}
+            </p>
+          </div>
+        </InfoDelivery>
         <hr />
         <strong>Datas</strong>
         <p>
-          <b>Retirada:</b> {delivery ? setDate(delivery.start_date) : ''}
-        </p>
-        <p>
-          <b>Entrega:</b> {delivery ? setDate(delivery.end_date) : ''}
+          <b>Retirada:</b>{' '}
+          {delivery.delivery.start_date
+            ? dataFormatted(delivery.delivery.start_date)
+            : 'Ainda pendente'}{' '}
+          <br />
+          <b>Entregue:</b>{' '}
+          {delivery.delivery.end_date
+            ? dataFormatted(delivery.delivery.end_date)
+            : 'Ainda pendente'}{' '}
         </p>
         <hr />
         <strong>Assinatura do destinatário</strong>
-        <br />
-        <div className="assign">
+        <BoxSignature>
           <img
             src={
-              checkSignature()
-                ? delivery.signature.url
+              delivery.delivery.signature
+                ? delivery.delivery.signature.url
                 : 'https://img.freepik.com/fotos-gratis/icone-de-sinal-de-aviso-triangulo-amarelo-isolado_53876-71267.jpg?size=626&ext=jpg'
             }
-            alt="assinatura"
+            alt={delivery.delivery.recipient.name}
           />
-        </div>
+        </BoxSignature>
       </Content>
     </Container>
+  ) : (
+    <h1>Not Modal</h1>
   );
 }
 
-DeliveryModal.propTypes = {
+DeliveryModal.proTypes = {
   delivery: PropTypes.shape().isRequired,
+};
+
+DeliveryModal.defaultProps = {
+  delivery: null,
 };

@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   MdSearch,
@@ -12,11 +13,13 @@ import {
 } from 'react-icons/md';
 
 import { FaSpinner } from 'react-icons/fa';
+import { setModalTrue } from '~/store/module/modal/actions';
 import history from '~/services/history';
 
 import api from '~/services/api';
 
 import Actions from '~/components/Actions';
+import Modal from '~/components/Modal/Delivery';
 
 import {
   Container,
@@ -28,13 +31,19 @@ import {
 
 function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
-  const [delivery, setDelivery] = useState({});
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [prePage, setPrePage] = useState(0);
   const [loadig, setLoading] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const { modal, delivery } = useSelector((state) => state.modal);
+
+  function handleVisibleModal(d) {
+    dispatch(setModalTrue({ delivery: d }));
+  }
 
   async function loadOrders(query, pg) {
     setLoading(true);
@@ -207,11 +216,6 @@ function Deliveries() {
     return status;
   }
 
-  function handleModal(d) {
-    setDelivery(d);
-    setVisibleModal(!visibleModal);
-  }
-
   const memoList = useMemo(
     () => (
       <ul>
@@ -245,7 +249,10 @@ function Deliveries() {
             <div className="actions">
               <Actions>
                 <BoxActions>
-                  <button onClick={() => handleModal(deliv)} type="button">
+                  <button
+                    onClick={() => handleVisibleModal(deliv)}
+                    type="button"
+                  >
                     <MdVisibility color="#7d40e7" size={16} />
                     <span>Visializar</span>
                   </button>
@@ -294,21 +301,26 @@ function Deliveries() {
 
   return (
     <Container>
-      <strong>Gerenciando encomendas</strong>
       <header>
-        <SearchInput>
-          <MdSearch color="#999" />
-          <input
-            type="text"
-            placeholder="Buscar por encomendas"
-            autoCapitalize="none"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </SearchInput>
-        <button onClick={() => history.push('/deliveries/form')} type="button">
-          <MdAdd size={25} color="#fff" />
-          CADASTRAR
-        </button>
+        <strong>Gerenciando encomendas</strong>
+        <div>
+          <SearchInput>
+            <MdSearch color="#999" />
+            <input
+              type="text"
+              placeholder="Buscar por encomendas"
+              autoCapitalize="none"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </SearchInput>
+          <button
+            onClick={() => history.push('/deliveries/form')}
+            type="button"
+          >
+            <MdAdd size={25} color="#fff" />
+            CADASTRAR
+          </button>
+        </div>
       </header>
 
       <Navigation>
@@ -330,6 +342,14 @@ function Deliveries() {
       ) : (
         memoList
       )}
+
+      <div
+        style={{
+          display: `${modal ? 'block' : 'none'}`,
+        }}
+      >
+        <Modal delivery={delivery} />
+      </div>
     </Container>
   );
 }
