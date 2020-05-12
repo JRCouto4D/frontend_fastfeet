@@ -17,7 +17,7 @@ export const Container = styled.div`
       height: 120px;
       width: 120px;
       border-radius: 50%;
-      background: #eee;
+      background: #ddd;
     }
 
     input {
