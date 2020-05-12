@@ -59,7 +59,7 @@ export const Content = styled.div`
   border-radius: 4px;
   padding: 30px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 
   div {
     width: 100%;

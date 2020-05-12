@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useField } from '@rocketseat/unform';
 
 import api from '~/services/api';
+import noPicture from '~/assets/no-picture.jpg';
 
 import { Container } from './styles';
 
-function AvatarInput({ deliverymanName }) {
+export default function AvatarInput({ deliverymanName }) {
   const { defaultValue, registerField } = useField('avatar');
 
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -40,7 +42,11 @@ function AvatarInput({ deliverymanName }) {
     <Container>
       <label htmlFor="avatar">
         <img
-          src={preview || 'https://dumont.sp.gov.br/lib/img/no-image.jpg'}
+          src={
+            preview || deliverymanName
+              ? `https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=svg&size=120&rounded=true&name=${deliverymanName}`
+              : noPicture
+          }
           alt=""
         />
 
@@ -57,4 +63,10 @@ function AvatarInput({ deliverymanName }) {
   );
 }
 
-export default AvatarInput;
+AvatarInput.propTypes = {
+  deliverymanName: PropTypes.string,
+};
+
+AvatarInput.defaultProps = {
+  deliverymanName: null,
+};

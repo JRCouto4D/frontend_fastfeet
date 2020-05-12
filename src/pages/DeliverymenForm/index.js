@@ -39,7 +39,10 @@ export default function DeliverymenForm({ location }) {
         </header>
 
         <Content>
-          <AvatarInput name="avatar_id" />
+          <AvatarInput
+            name="avatar_id"
+            deliverymanName={location.state && location.state.deliveryman.name}
+          />
 
           <div>
             <InputBlock>
