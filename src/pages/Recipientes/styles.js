@@ -3,6 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
+  height: 100vh;
 
   header {
     strong {
@@ -98,7 +99,7 @@ export const TableDeliveryman = styled.ul`
 
   li.header {
     display: grid;
-    grid-template-columns: 200px 200px 1fr 1fr auto;
+    grid-template-columns: 100px 220px 1fr auto;
     background: #f5f5f5;
 
     strong:first-child {
@@ -108,7 +109,7 @@ export const TableDeliveryman = styled.ul`
 
   li {
     display: grid;
-    grid-template-columns: 200px 200px 1fr 1fr auto;
+    grid-template-columns: 100px 220px 1fr auto;
     background: #fff;
     border-radius: 4px;
     justify-content: center;
@@ -117,19 +118,6 @@ export const TableDeliveryman = styled.ul`
 
     span:first-child {
       padding-left: 10px;
-    }
-
-    div.foto {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        margin-right: 5px;
-      }
     }
 
     div.actions {
