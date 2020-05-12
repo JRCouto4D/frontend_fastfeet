@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { Form } from '@rocketseat/unform';
 
 export const Container = styled.div`
   width: 900px;
   min-width: 900px;
-  margin: 30px auto;
+  margin: 30px auto 0;
+  height: 100vh;
 
   header {
     width: 100%;
@@ -13,7 +15,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     strong {
-      font-size: 26px;
+      font-size: 24px;
       color: #444;
     }
 
@@ -52,6 +54,8 @@ export const Container = styled.div`
   }
 `;
 
+export const FormDeliveryman = styled(Form)``;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,5 +90,9 @@ export const InputBlock = styled.div`
 
   & + div {
     margin-top: 20px;
+  }
+
+  span {
+    display: none;
   }
 `;

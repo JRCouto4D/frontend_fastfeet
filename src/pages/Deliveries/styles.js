@@ -40,7 +40,7 @@ export const Container = styled.div`
   ul {
     width: 100%;
     display: grid;
-    grid-gap: 12px;
+    grid-gap: 15px;
 
     li.header {
       margin-top: 3px;

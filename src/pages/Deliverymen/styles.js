@@ -3,6 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
+  height: 100vh;
 
   header {
     strong {
@@ -94,7 +95,7 @@ export const TableDeliveryman = styled.ul`
   width: 100%;
   display: grid;
   grid-gap: 12px;
-  margin: 20px 0;
+  margin: 20px 0 0;
 
   li.header {
     display: grid;

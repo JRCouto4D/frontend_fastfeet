@@ -38,7 +38,7 @@ export default function DeliveriesForm({ location }) {
         search: '',
       },
     });
-    return response.data;
+    return response.data.deliverymen;
   }
 
   async function loadRecipients() {

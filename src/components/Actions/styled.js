@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 
 export const Container = styled.div`
   button {
@@ -13,8 +14,18 @@ export const Container = styled.div`
   }
 `;
 
+export const KeyBoard = styled(MdKeyboardArrowUp)`
+  position: absolute;
+  top: ${(props) => `${props.coords.y + 5}px`};
+  left: ${(props) => `${props.coords.x - 5}px`};
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  color: #ddd;
+`;
+
 export const ActionList = styled.div`
   position: absolute;
+  top: ${(props) => `${props.coords.y + 17}px`};
+  left: ${(props) => `${props.coords.x - 75}px`};
   width: 150px;
   padding: 15px 0px;
   background: #fff;
