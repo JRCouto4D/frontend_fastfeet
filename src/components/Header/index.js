@@ -24,7 +24,7 @@ export default function Header() {
           <nav>
             <Link to="/deliveries">ENCOMENDAS</Link>
             <Link to="/deliverymen">ENTREGADORES</Link>
-            <Link to="/recipientes">DESTINATÁRIOS</Link>
+            <Link to="/recipients">DESTINATÁRIOS</Link>
             <Link to="/problems">PROBLEMAS</Link>
           </nav>
         </div>

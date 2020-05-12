@@ -25,17 +25,6 @@ export default function DeliverymenForm({ location }) {
   });
 
   async function handleSubmit(data) {
-    console.tron.log(data);
-    if (data.name === '') {
-      toast.error('Antes de continunar, preencha o campo nome.');
-      return;
-    }
-
-    if (data.email === '') {
-      toast.error('Antes de continuar, preencha o campo email.');
-      return;
-    }
-
     if (location.state) {
       const { deliveryman } = location.state;
 

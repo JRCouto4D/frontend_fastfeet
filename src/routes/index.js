@@ -31,9 +31,9 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/problems" component={Problems} isPrivate />
-      <Route path="/recipientes" exact component={Recipients} isPrivate />
+      <Route path="/recipients" exact component={Recipients} isPrivate />
       <Route
-        path="/recipientes/form"
+        path="/recipients/form"
         exact
         component={RecipientsForm}
         isPrivate

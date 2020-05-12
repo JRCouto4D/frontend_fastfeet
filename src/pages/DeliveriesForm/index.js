@@ -48,7 +48,7 @@ export default function DeliveriesForm({ location }) {
       },
     });
 
-    return response.data;
+    return response.data.recipients;
   }
 
   async function handleSubmit(data) {
