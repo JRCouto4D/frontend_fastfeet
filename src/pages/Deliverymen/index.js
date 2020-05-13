@@ -180,7 +180,7 @@ export default function Deliverymen() {
           <FaSpinner size={14} color="#444" />
         </Loading>
       ) : deliverymen.length === 0 ? (
-        <h1>Nenhuma encomenda no sistema</h1>
+        <h1>Não há entregadores registrados no sistema</h1>
       ) : (
         memoList
       )}
