@@ -1,5 +1,8 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import {
   MdFastRewind,
@@ -8,8 +11,10 @@ import {
   MdDeleteForever,
 } from 'react-icons/md';
 import { FaSpinner } from 'react-icons/fa';
+import { setModalTrue } from '~/store/module/modal/actions';
 
 import Actions from '~/components/Actions';
+import Modal from '~/components/Modal/Problems';
 
 import api from '~/services/api';
 
@@ -21,6 +26,16 @@ export default function Problems() {
   const [total, setTotal] = useState(0);
   const [prePage, setPrePage] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  const { modal, delivery } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+
+  const handleVisibleModal = useCallback(
+    (d) => {
+      dispatch(setModalTrue({ delivery: d }));
+    },
+    [dispatch]
+  );
 
   async function loadProlems(pag) {
     setLoading(true);
@@ -56,6 +71,21 @@ export default function Problems() {
     loadProlems(page);
   }
 
+  async function handleCanceledDelivery(id) {
+    const del = window.confirm(
+      'Tem certeza de que deseja cancelar essa encomenda?'
+    );
+
+    if (del) {
+      try {
+        await api.delete(`/problem/${id}/cancel-delivery`);
+        toast.success('Encomenda cancelada com sucesso!');
+      } catch (error) {
+        toast.error(`Não foi possível cancelar encomenda - ${error}`);
+      }
+    }
+  }
+
   const memoList = useMemo(
     () => (
       <TableProblems>
@@ -76,16 +106,24 @@ export default function Problems() {
             <div className="actions">
               <Actions>
                 <div>
-                  <button onClick={() => {}} type="button">
+                  <button
+                    onClick={() => handleVisibleModal(problem)}
+                    type="button"
+                  >
                     <MdVisibility color="#7d40e7" size={16} />
                     <span>Visializar</span>
                   </button>
                 </div>
 
                 <div>
-                  <button onClick={() => {}} type="button">
+                  <button
+                    onClick={() => {
+                      handleCanceledDelivery(problem.id);
+                    }}
+                    type="button"
+                  >
                     <MdDeleteForever color="#DE3B3B" size={16} />
-                    <span>Deletar</span>
+                    <span>Cancelar encomenda</span>
                   </button>
                 </div>
               </Actions>
@@ -95,7 +133,7 @@ export default function Problems() {
       </TableProblems>
     ),
 
-    [problems]
+    [problems, handleVisibleModal]
   );
 
   return (
@@ -123,6 +161,14 @@ export default function Problems() {
       ) : (
         memoList
       )}
+
+      <div
+        style={{
+          display: `${modal ? 'block' : 'none'}`,
+        }}
+      >
+        <Modal delivery={delivery} />
+      </div>
     </Container>
   );
 }

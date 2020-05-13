@@ -77,22 +77,24 @@ export const TableProblems = styled.ul`
 
     div.actions {
       div {
-        padding: 0 10px;
+        padding: 0 5px;
 
         button {
           border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           display: flex;
           justify-content: left;
           align-items: center;
-          font-size: 16px;
+          font-size: 14px;
           padding: 10px 0;
+          width: 100%;
 
           &:hover {
             text-decoration: underline;
           }
 
           span {
-            margin-left: 10px;
+            display: block;
+            margin-left: 5px;
           }
         }
       }

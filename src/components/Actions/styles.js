@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const ActionList = styled.div`
   position: absolute;
-  width: 150px;
+  min-width: 150px;
   padding: 15px 0px;
   background: #fff;
   border-radius: 4px;
