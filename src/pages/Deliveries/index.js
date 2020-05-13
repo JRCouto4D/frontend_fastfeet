@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -41,9 +41,12 @@ function Deliveries() {
 
   const { modal, delivery } = useSelector((state) => state.modal);
 
-  function handleVisibleModal(d) {
-    dispatch(setModalTrue({ delivery: d }));
-  }
+  const handleVisibleModal = useCallback(
+    (d) => {
+      dispatch(setModalTrue({ delivery: d }));
+    },
+    [dispatch]
+  );
 
   async function loadOrders(query, pg) {
     setLoading(true);
@@ -231,20 +234,59 @@ function Deliveries() {
         {deliveries.map((deliv) => (
           <li key={deliv.id}>
             <span>{`#${deliv.id}`}</span>
-            <span>{deliv.recipient.name}</span>
+            {deliv.recipient ? (
+              <span>{deliv.recipient.name}</span>
+            ) : (
+              <p>
+                <b>DELETADO</b>
+              </p>
+            )}
+
             <div className="avatar">
               <img
                 src={
-                  deliv.deliveryman.avatar
-                    ? deliv.deliveryman.avatar.url
-                    : `https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=svg&size=120&rounded=true&name=${deliv.deliveryman.name}`
+                  deliv.deliveryman
+                    ? deliv.deliveryman.avatar
+                      ? deliv.deliveryman.avatar.url
+                      : `https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=svg&size=120&rounded=true&name=${deliv.deliveryman.name}`
+                    : 'https://images.vexels.com/media/users/3/143555/isolated/preview/af8dbc9112fe8ee9328539534b5a6548-ponto-de-interroga----o-3d-vermelho-e-amarelo-by-vexels.png'
                 }
-                alt={deliv.deliveryman.name}
+                alt={deliv.deliveryman ? deliv.deliveryman.name : ''}
               />
-              <span>{deliv.deliveryman.name}</span>
+              <span>
+                {deliv.deliveryman ? deliv.deliveryman.name : 'DELETADO'}
+              </span>
             </div>
-            <span>{deliv.recipient.city}</span>
-            <span>{deliv.recipient.state}</span>
+            <span>
+              {deliv.recipient ? (
+                deliv.recipient.city
+              ) : (
+                <img
+                  src="https://images.vexels.com/media/users/3/143555/isolated/preview/af8dbc9112fe8ee9328539534b5a6548-ponto-de-interroga----o-3d-vermelho-e-amarelo-by-vexels.png"
+                  alt=""
+                  style={{
+                    width: 35,
+                    height: 35,
+                    margin: 'auto',
+                  }}
+                />
+              )}
+            </span>
+            <span>
+              {deliv.recipient ? (
+                deliv.recipient.state
+              ) : (
+                <img
+                  src="https://images.vexels.com/media/users/3/143555/isolated/preview/af8dbc9112fe8ee9328539534b5a6548-ponto-de-interroga----o-3d-vermelho-e-amarelo-by-vexels.png"
+                  alt=""
+                  style={{
+                    width: 35,
+                    height: 35,
+                    margin: 'auto',
+                  }}
+                />
+              )}
+            </span>
             <span>{showStatus(deliv)}</span>
             <div className="actions">
               <Actions>
@@ -264,6 +306,7 @@ function Deliveries() {
                       history.push('/deliveries/form', { delivery: deliv });
                     }}
                     type="button"
+                    disabled={deliv.start_date !== null}
                   >
                     <MdCreate color="#4D85EE" size={16} />
                     <span>Editar</span>
@@ -283,7 +326,7 @@ function Deliveries() {
       </ul>
     ),
 
-    [deliveries]
+    [deliveries, handleVisibleModal]
   );
 
   function nextPage() {

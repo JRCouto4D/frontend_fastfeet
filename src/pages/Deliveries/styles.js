@@ -111,6 +111,11 @@ export const BoxActions = styled.div`
     font-size: 16px;
     padding: 10px 0;
 
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
     &:hover {
       text-decoration: underline;
     }

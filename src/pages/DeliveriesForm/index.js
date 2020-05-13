@@ -19,16 +19,27 @@ export default function DeliveriesForm({ location }) {
 
   useEffect(() => {
     if (location.state) {
-      setSelectedDeliveryman(location.state.delivery.deliveryman.id);
-      setSelectedRecipient(location.state.delivery.recipient.id);
-      setDeliverymanValue({
-        id: location.state.delivery.deliveryman.id,
-        name: location.state.delivery.deliveryman.name,
-      });
-      setRecipientValue({
-        id: location.state.delivery.recipient.id,
-        name: location.state.delivery.recipient.name,
-      });
+      const { delivery } = location.state;
+      setSelectedDeliveryman(
+        delivery.deliveryman ? delivery.deliveryman.id : 0
+      );
+      setSelectedRecipient(delivery.recipient ? delivery.recipient.id : 0);
+      setDeliverymanValue(
+        delivery.deliveryman
+          ? {
+              id: delivery.deliveryman.id,
+              name: delivery.deliveryman.name,
+            }
+          : null
+      );
+      setRecipientValue(
+        delivery.recipient
+          ? {
+              id: delivery.recipient.id,
+              name: delivery.recipient.name,
+            }
+          : null
+      );
     }
   }, [location]);
 
@@ -68,6 +79,7 @@ export default function DeliveriesForm({ location }) {
     }
 
     if (location.state) {
+      console.tron.log(selectedRecipient);
       try {
         await api.put(`deliveries/${location.state.delivery.id}`, {
           product: data.product,
@@ -76,8 +88,8 @@ export default function DeliveriesForm({ location }) {
         });
         toast.success('Encomanda editada com sucesso!');
         history.push('/deliveries');
-      } catch (err) {
-        toast.error('Erro ao tentar editar encomenda.');
+      } catch (error) {
+        toast.error(`Erro ao tentar editar encomenda - ${error}`);
         history.push('/deliveries');
       }
     } else {

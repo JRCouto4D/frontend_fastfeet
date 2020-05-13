@@ -5,7 +5,6 @@ export const Container = styled.div`
   width: 900px;
   min-width: 900px;
   margin: 30px auto 0;
-  height: 100vh;
 
   header {
     width: 100%;
@@ -130,5 +129,9 @@ export const InputBlock = styled.div`
     height: 45px;
     padding-left: 15px;
     font-size: 16px;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+    }
   }
 `;

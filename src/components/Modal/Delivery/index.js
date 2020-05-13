@@ -46,13 +46,17 @@ export default function DeliveryModal() {
           </div>
           <div>
             <strong>Endereço de entrega</strong>
-            <p>
-              {delivery.delivery.recipient.street},{' '}
-              {delivery.delivery.recipient.number} <br />
-              {delivery.delivery.recipient.city} -{' '}
-              {delivery.delivery.recipient.state} <br />
-              {delivery.delivery.recipient.zip_code}
-            </p>
+            {delivery.delivery.recipient ? (
+              <p>
+                {delivery.delivery.recipient.street},{' '}
+                {delivery.delivery.recipient.number} <br />
+                {delivery.delivery.recipient.city} -{' '}
+                {delivery.delivery.recipient.state} <br />
+                {delivery.delivery.recipient.zip_code}
+              </p>
+            ) : (
+              ''
+            )}
           </div>
         </InfoDelivery>
         <hr />
@@ -77,7 +81,11 @@ export default function DeliveryModal() {
                 ? delivery.delivery.signature.url
                 : 'https://img.freepik.com/fotos-gratis/icone-de-sinal-de-aviso-triangulo-amarelo-isolado_53876-71267.jpg?size=626&ext=jpg'
             }
-            alt={delivery.delivery.recipient.name}
+            alt={
+              delivery.delivery.recipient
+                ? delivery.delivery.recipient.name
+                : ''
+            }
           />
         </BoxSignature>
       </Content>

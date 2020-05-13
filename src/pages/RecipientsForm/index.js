@@ -116,6 +116,8 @@ export default function RecipientsForm({ location }) {
                   id="name"
                   name="name"
                   placeholder="Ludwing van Beethoven"
+                  autoComplete="off"
+                  autoCapitalize="off"
                 />
               </InputBlock>
             </div>
@@ -127,6 +129,8 @@ export default function RecipientsForm({ location }) {
                   id="street"
                   name="street"
                   placeholder="Ex: Rua Beethoven"
+                  autoComplete="off"
+                  autoCapitalize="off"
                 />
               </InputBlock>
             </div>
@@ -134,7 +138,13 @@ export default function RecipientsForm({ location }) {
             <div className="number">
               <InputBlock>
                 <strong>Número</strong>
-                <Input id="number" name="number" placeholder="Ex: 1250" />
+                <Input
+                  id="number"
+                  name="number"
+                  placeholder="Ex: 1250"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                />
               </InputBlock>
             </div>
 
@@ -145,6 +155,8 @@ export default function RecipientsForm({ location }) {
                   id="neighborhood"
                   name="neighborhood"
                   placeholder="Ex: Bairro Beethoven"
+                  autoComplete="off"
+                  autoCapitalize="off"
                 />
               </InputBlock>
             </div>
@@ -156,6 +168,8 @@ export default function RecipientsForm({ location }) {
                   id="complement"
                   name="complement"
                   placeholder="Ex: Terrio"
+                  autoComplete="off"
+                  autoCapitalize="off"
                 />
               </InputBlock>
             </div>
@@ -163,14 +177,26 @@ export default function RecipientsForm({ location }) {
             <div className="city">
               <InputBlock>
                 <strong>Cidade</strong>
-                <Input id="city" name="city" placeholder="Diadema" />
+                <Input
+                  id="city"
+                  name="city"
+                  placeholder="Diadema"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                />
               </InputBlock>
             </div>
 
             <div className="state">
               <InputBlock>
                 <strong>Estado</strong>
-                <Input id="state" name="state" placeholder="São Paulo" />
+                <Input
+                  id="state"
+                  name="state"
+                  placeholder="São Paulo"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                />
               </InputBlock>
             </div>
 
@@ -181,6 +207,8 @@ export default function RecipientsForm({ location }) {
                   id="zip_code"
                   name="zip_code"
                   placeholder="Apenas numeros"
+                  autoComplete="off"
+                  autoCapitalize="off"
                 />
               </InputBlock>
             </div>

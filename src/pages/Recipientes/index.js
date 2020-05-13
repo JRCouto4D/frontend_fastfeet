@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { toast } from 'react-toastify';
 
 import {
@@ -49,16 +49,19 @@ export default function Recipientes() {
     setLoading(false);
   }
 
-  async function handleDelete(id) {
-    try {
-      await api.delete(`recipients/${id}`);
-      toast.success('Destinatário deletado com sucesso!!');
-      loadRecipients(search, page);
-    } catch (err) {
-      toast.error('Erro ao tentar deletar o destinatário');
-      loadRecipients(search, page);
-    }
-  }
+  const handleDelete = useCallback(
+    async (id) => {
+      try {
+        await api.delete(`recipients/${id}`);
+        toast.success('Destinatário deletado com sucesso!!');
+        loadRecipients(search, page);
+      } catch (err) {
+        toast.error('Erro ao tentar deletar o destinatário');
+        loadRecipients(search, page);
+      }
+    },
+    [search, page]
+  );
 
   useEffect(() => {
     loadRecipients(search, page);
@@ -125,7 +128,7 @@ export default function Recipientes() {
       </TableDeliveryman>
     ),
 
-    [recipients]
+    [recipients, handleDelete]
   );
 
   return (

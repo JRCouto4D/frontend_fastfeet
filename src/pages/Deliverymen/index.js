@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { toast } from 'react-toastify';
 
 import {
@@ -66,17 +66,20 @@ export default function Deliverymen() {
     loadDeliverymen(search, page);
   }
 
-  async function handleDelete(id) {
-    try {
-      await api.delete(`deliverymen/${id}`);
-      loadDeliverymen(search, page);
-      toast.success('Entregador deletado com sucesso!');
-      history.push('/deliverymen');
-    } catch (err) {
-      toast.error('Erro ao tentar deletar o entregador');
-      history.push('/deliverymen');
-    }
-  }
+  const handleDelete = useCallback(
+    async (id) => {
+      try {
+        await api.delete(`deliverymen/${id}`);
+        loadDeliverymen(search, page);
+        toast.success('Entregador deletado com sucesso!');
+        history.push('/deliverymen');
+      } catch (err) {
+        toast.error('Erro ao tentar deletar o entregador');
+        history.push('/deliverymen');
+      }
+    },
+    [search, page]
+  );
 
   const memoList = useMemo(
     () => (
@@ -134,7 +137,7 @@ export default function Deliverymen() {
       </TableDeliveryman>
     ),
 
-    [deliverymen]
+    [deliverymen, handleDelete]
   );
 
   return (
