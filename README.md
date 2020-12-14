@@ -35,7 +35,7 @@ A aplicação vai se iniciar na tela de login. Faça login com `admin@fastfeet.c
 - redux-persist
 - styled-components
 
-<h3 align="center">Pronto, a aplicação front-end do FastFeet está rodando!!!
+<h3 align="center">Pronto, a aplicação front-end do FastFeet já deve está rodando!!!
   
 ## Backend
 
