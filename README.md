@@ -1,68 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  <img alt="Fastfeet" title="Fastfeet" src="https://raw.githubusercontent.com/Rocketseat/bootcamp-gostack-desafio-02/master/.github/logo.png" width="300px" />
+</h1>
 
-## Available Scripts
+<span align="center">
+  Trata-se de uma aplicação back-end densevolvida com NodeJS para uma transportadora fictícia, o FastFeet.
+</span>
 
-In the project directory, you can run:
+# Instruções para executar a aplicação.
 
-### `yarn start`
+Faça o download da aplicação <a href="https://rocketseat.com.br">back-end</a> e siga as instruções.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## WEB
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Rode o seguinte comando na raiz da pasta frontend para instalar as dependencias
 
-### `yarn test`
+```
+  yarn
+```
+Agora para iniciar a aplicação WEB basta rodar:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+  yarn start
+```
 
-### `yarn build`
+A aplicação vai se iniciar na tela de login. Faça login com `admin@fastfeet.com` e senha `123456`.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### tecnologias aprendidas e aplicadas
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- ReactJS
+- eslint
+- prettier
+- redux
+- redux-saga
+- redux-persist
+- styled-components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h3 align="center">Pronto, a aplicação front-end do FastFeet está rodando!!!
+  
+## Backend
 
-### `yarn eject`
+https://github.com/JRCouto4D/backend_fastfeet
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Mobile
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+https://github.com/JRCouto4D/mobile_fastfeet
