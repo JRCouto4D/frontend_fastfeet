@@ -8,7 +8,7 @@
 
 # Instruções para executar a aplicação.
 
-Antes de mais nada, faça o download da aplicação <a href="https://rocketseat.com.br">back-end</a> e siga as instruções.
+Antes de mais nada, faça o download da aplicação <a href="https://github.com/JRCouto4D/backend_fastfeet">back-end</a> e siga as instruções.
 
 ## WEB
 
